@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Unbounded:wght@200..900&display=swap");
+@import "tailwindcss";
+
+html {
+  min-width: 320px;
+  scroll-behavior: auto;
+}
+
+@theme inline {
+  --font-display: "Unbounded", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+}
+
+:root {
+  --primary: oklch(0.8 0.14 70);
+  --secondary: oklch(0.72 0.1 195);
+  --gradient-aurora: linear-gradient(100deg, var(--primary), var(--secondary));
+  --muted-foreground: oklch(0.7 0.02 220);
+  --chart-1: oklch(0.8 0.14 70);
+  --chart-2: oklch(0.72 0.1 195);
+  --chart-3: oklch(0.65 0.15 300);
+  --chart-4: oklch(0.7 0.17 25);
+  --chart-5: oklch(0.8 0.12 140);
+  --chart-6: oklch(65.489% 0.16763 268.882);
+  --chart-7: oklch(82.541% 0.11619 108.716);
+  --card: oklch(0.14 0.02 230 / 55%);
+  --card-foreground: oklch(0.95 0.01 220);
+  --border: oklch(0.95 0.01 220 / 18%);
+  --glow-primary:
+    0 0 0 1px rgba(255, 255, 255, 0.12), 0 0 18px rgba(255, 180, 120, 0.35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  color: white;
+}
+
+@layer utilities {
+  .text-aurora {
+    background: var(--gradient-aurora);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+  }
+
+  .glow {
+    box-shadow: var(--glow-primary);
+  }
+
+  .animate-twinkle {
+    animation: twinkle 3s ease-in-out infinite;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+/* Landing motion: one-time text reveals and section-relative planet travel. */
+.landing-reveal {
+  opacity: 0;
+  transition:
+    opacity 1900ms ease,
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.landing-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.steps-feeling {
+  width: 100%;
+}
+
+.steps-visual-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #8892b0;
+}
+
+/* 31-Bar Equalizer */
+.steps-spectrum {
+  display: flex;
+  height: 95px;
+  margin: 16px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.steps-spectrum span {
+  width: 4px;
+  height: 20%;
+  background: #64ffda; /* secondary accent */
+  opacity: 0.45;
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+
+/* Wave height distribution */
+.steps-spectrum span:nth-child(3n) {
+  height: 45%;
+  opacity: 0.8;
+}
+.steps-spectrum span:nth-child(5n) {
+  height: 70%;
+}
+.steps-spectrum span:nth-child(n + 10):nth-child(-n + 22) {
+  height: 58%;
+}
+.steps-spectrum span:nth-child(n + 13):nth-child(-n + 18) {
+  height: 90%;
+  opacity: 1;
+}
+.steps-spectrum span:nth-child(even) {
+  background: #fca311; /* primary accent */
+}
+
+/* Emotion Title & Description */
+.steps-emotion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.steps-emotion > span:first-child {
+  font-size: 23px;
+  color: #64ffda;
+  font-weight: 300;
+}
+
+.steps-emotion > span:last-child {
+  font-size: 9px;
+  color: #8892b0;
+}
+
+/* Tags */
+.steps-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+  padding-top: 14px;
+  font-size: 9px;
+  color: #8892b0;
+}
+
+.steps-themes > span::before {
+  content: "·";
+  color: #64ffda;
+  margin-right: 5px;
+}
+
+/*Third Card Styles*/
+.steps-constellation-svg {
+  width: 100%;
+  height: auto;
+  max-height: 175px;
+  overflow: hidden;
+  margin: 0;
+  display: block;
+}
+
+/* Faint background stars */
+.steps-distant-stars {
+  fill: #8892b0;
+  opacity: 0.5;
+}
+
+/* Constellation line connections */
+.steps-star-lines {
+  stroke: #64ffda; /* Teal accent */
+  stroke-width: 1;
+  fill: none;
+  opacity: 0.4;
+}
+
+/* Existing constellation stars with subtle glow */
+.steps-small-star {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 4px #64ffda);
+}
+
+/* Highlighted new star */
+.steps-new-star {
+  fill: #ffffff;
+  stroke: #fca311; /* Gold accent */
+  stroke-width: 1;
+  filter: drop-shadow(0 0 6px #fca311);
+}
+
+/* Rotating outer orbit ring */
+.steps-star-ring {
+  fill: none;
+  opacity: 0.4;
+  stroke-dasharray: 2 5;
+  transform-origin: 228px 54px;
+  animation: steps-orbit 40s linear infinite;
+}
+
+/* "A new moment" text */
+.steps-svg-label {
+  fill: #8892b0;
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+}
+
+@keyframes steps-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steps-star-ring {
+    animation: none;
+  }
+}
